@@ -26,7 +26,7 @@ def capture(device = "/dev/spidev0.0"):
   np.right_shift(a, 8, a)
   return np.uint8(a)
 
-def send(url='http://192.168.1.14/thermal/receiveData.php', interval=2.0):
+def send(url='http://192.168.254.107/thermal/receiveData.php', interval=2.0):
   Timer(interval, send).start()
   global image
   if image is not None:

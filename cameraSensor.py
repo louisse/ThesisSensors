@@ -5,7 +5,8 @@ from datetime import datetime
 from threading import Timer
 from time import sleep
 
-url='http://localhost/camera/receiveData.php'
+IP_ADDRESS = '192.168.254.107'
+url='http://' + IP_ADDRESS + '/camera/receiveData.php'
 cap = cv2.VideoCapture(0)
 while(True):
   if cap.isOpened():

@@ -13,7 +13,7 @@ channel = 37
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-IP_ADDRESS='192.168.254.100'
+IP_ADDRESS='192.168.254.107'
 url='http://'+IP_ADDRESS+'/sendSoundData.php'
 value=0
 prev_reading = None
@@ -27,6 +27,8 @@ GPIO.add_event_callback(channel, callback)  # assign function to GPIO PIN, Run f
 # infinite loop
 while True:
   current_reading = value
+  if current_reading == 0:
+    current_data = 0
   if prev_reading == current_reading:
     current_data = current_data + uniform(-0.1, 0.1)
     if current_data < 0:
@@ -37,7 +39,7 @@ while True:
     if current_reading == 1:
       current_data = uniform(0.8, 1.0)
     elif current_reading == 0:
-      current_data = uniform(0.0, 0.2)
+      current_data = 0
 
   data = {'value': int(current_data * 255)}
   r = requests.post(url, data = data)
